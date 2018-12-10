@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aks-kv-sample-pod
+  labels:
+    app: aks-kv-demo
+    aadpodidbinding: "demo_app"
+spec:
+  containers:
+    - name: aks-kv-container
+      image: thorstenhans/aks-keyvault-sample:latest
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: test
+          mountPath: /kv
+          readOnly: true
+  volumes:
+    - name: test
+      flexVolume:
+        driver: "azure/kv"
+        options:
+          usepodidentity: "true"
+          keyvaultname: "demokv"
+          keyvaultobjectnames: "sample1;sampl2"
+          keyvaultobjecttypes: "secret;secret"
+          resourcegroup: "demo-resource-group"
+          subscriptionid: "00000000-0000-0000-000000000000"
+          tenantid: "00000000-0000-0000-000000000000"

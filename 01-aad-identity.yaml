@@ -1,0 +1,7 @@
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  name: demo-aad-identity
+  ClientID: 00000000-0000-0000-000000000000
+  ResourceID: /subscriptions/00000000-0000-0000-000000000000/resourcegroups/demo-resource-grpup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/demo_identity
+  type: 0
